@@ -1,13 +1,15 @@
-var path = require("path");
+const path = require("path");
 const express = require("express");
-var bodyParser = require("body-parser");
-var cors = require("cors");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const dotenv = require("dotenv");
-const { response } = require("express");
-
 dotenv.config();
-const baseUrl = "https://api.meaningcloud.com/sentiment-2.1?key=";
-const key = process.env.API_KEY;
+
+const urlObject = {
+  key: process.env.API_KEY,
+  baseUrl: "https://api.meaningcloud.com/sentiment-2.1?key=",
+  mid: "&lang=auto&url=",
+};
 
 const app = express();
 app.use(cors());
@@ -20,27 +22,14 @@ app.use(
   })
 );
 
-app.use(express.static("client"));
+app.use(express.static("dist"));
 
 app.get("/", function (req, res) {
-  res.sendFile(path.dirname(__dirname) + "/client/views/index.html");
+  res.sendFile("dist/index.html");
 });
 
-app.post("/review", async (req, res) => {
-  fetch(baseUrl + key + "&lang=auto&url=" + req.body, {
-    method: "POST",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  try {
-      const newData = await response.json();
-      res.send(newData)
-  } catch (error) {
-    console.log("error", error);
-  }
+app.get("/article", function (req, res) {
+  res.json(urlObject);
 });
 
 // designates what port the app will listen to for incoming requests

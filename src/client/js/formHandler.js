@@ -1,25 +1,37 @@
-import { checkUrl } from "..";
-
 function handleSubmit(event) {
   event.preventDefault();
 
   // check what text was put into the form field
   let formText = document.getElementById("article").value;
-
-  Client.checkUrl(formText);
-  if(checkUrl(formText){
-      console.log(true);
+  if (Client.urlChecker(formText)) {
+    fetch("http://localhost:8081/article")
+      .then((res) => res.json())
+      .then(function (res) {
+        getArticle(res.baseUrl, res.key, res.mid, formText);
+      });
   } else {
-      console.log(false)
+    console.log("This isn't url");
   }
-  
-  fetch("http://localhost:8081/review", formText)
-    .then((res) => {
-      return res.json();
-    })
-    .then(function (data) {
-      document.getElementById("results").innerHTML = data.message;
-    });
 }
+
+const getArticle = async (baseURL, key, mid, article) => {
+  console.log("Did this get hit?");
+  const res = await fetch(baseURL + key + mid + article);
+  try {
+    const data = await res.json();
+    console.log(data.agreement);
+    setUI(data);
+  } catch (err) {
+    console.log(err + "did this get entered?");
+  }
+};
+
+const setUI = ({ score_tag, agreement, subjectivity, confidence, irony }) => {
+  document.getElementById("score_tag").innerHTML = score_tag;
+  document.getElementById("agreement").innerHTML = agreement;
+  document.getElementById("subjectivity").innerHTML = subjectivity;
+  document.getElementById("confidence").innerHTML = confidence;
+  document.getElementById("irony").innerHTML = irony;
+};
 
 export { handleSubmit };

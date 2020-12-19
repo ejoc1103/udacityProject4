@@ -1,4 +1,4 @@
-function checkUrl(inputText) {
+function urlChecker(inputText) {
   const pattern = new RegExp(
     "^(https?:\\/\\/)?" + // protocol
       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
@@ -8,11 +8,11 @@ function checkUrl(inputText) {
       "(\\#[-a-z\\d_]*)?$",
     "i"
   ); // fragment locator
-  if (pattern.text(inputText)) {
+  if (pattern.test(inputText)) {
     return true;
   } else {
     return false;
   }
 }
 
-export { checkForName };
+export { urlChecker };
