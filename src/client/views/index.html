@@ -8,33 +8,30 @@
     <body>
         <header>
             <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
+                Assess this Article Please
             </div>
         </header>
 
         <main>
             <section>
                 <form class="" onsubmit="return Client.handleSubmit(event)">
-                    <input id="article" type="text" name="input" value="" onblur="Client.onBlur()" placeholder="Article URL">
+                    <input id="article" type="text" name="input" value="" placeholder="Article URL">
                     <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
                 </form>
             <section>
 
-            <section>
-                <strong>Form Results:</strong>
-                <div id="score_tag"></div>
-                <div id="agreement"></div>
-                <div id="subjectivity"></div>
-                <div id="confidence"></div>
-                <div id="irony"></div>
+            <section id="assessment">
+                <strong id="assessmentTitle">Article Assessment:</strong>
+                <h3 id="score_tag"></h3>
+                <h3 id="agreement"></h3>
+                <h3 id="subjectivity"></h3>
+                <h3 id="confidence"></h3>
+                <h3 id="irony"></h3>
             </section>
         </main>
 
         <footer>
-            <p>This is a footer</p>
+            <p>Ed O'Connor Udacity Project 4, 2020</p>
         </footer>
 
     </body>
