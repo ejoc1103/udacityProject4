@@ -1,6 +1,6 @@
-import { getArticle } from "../src/client/js/formHandler";
+import { setScore } from "../src/client/js/formHandler";
 
-test("Should return data", getArticle(), async () => {
-  const data = await fetch();
-  expect(data.toBeDefined());
+test("Should return positive", () => {
+  const score_tag = "P+";
+  expect(setScore(score_tag)).toBe("Strong Positive");
 });

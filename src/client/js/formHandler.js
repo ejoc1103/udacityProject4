@@ -19,22 +19,20 @@ function handleSubmit(event) {
     document.getElementById("subjectivity").innerHTML = ``;
     document.getElementById("confidence").innerHTML = ``;
     document.getElementById("irony").innerHTML = ``;
-    console.log("This isn't a url");
   }
 }
 
 const getArticle = async (baseURL, key, mid, article) => {
-  const res = await fetch(baseURL + key + mid + article);
   try {
+    const res = await fetch(baseURL + key + mid + article);
     const data = await res.json();
-    setUI(data);
+    setUI(data, setScore(data.score_tag));
   } catch (err) {
     console.log(err + "error");
   }
 };
 
-const setUI = ({ score_tag, agreement, subjectivity, confidence, irony }) => {
-  document.getElementById("assessmentTitle").innerHTML = `Article Assessment`;
+const setScore = (score_tag) => {
   let score;
 
   if (score_tag === "P+") {
@@ -50,6 +48,12 @@ const setUI = ({ score_tag, agreement, subjectivity, confidence, irony }) => {
   } else {
     score = "Without sentiment";
   }
+
+  return score;
+};
+
+const setUI = ({ agreement, subjectivity, confidence, irony }, score) => {
+  document.getElementById("assessmentTitle").innerHTML = `Article Assessment`;
 
   document.getElementById(
     "score_tag"
@@ -68,4 +72,4 @@ const setUI = ({ score_tag, agreement, subjectivity, confidence, irony }) => {
   ).innerHTML = `The text in this article is ${irony}`;
 };
 
-export { handleSubmit, getArticle };
+export { handleSubmit, setScore };
