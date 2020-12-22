@@ -9,8 +9,9 @@ Sentiment, Irony and a few other factors.
 
 ## Get Up and Running
 
-To run you will need to
-npm install
-npm run build-prod
-npm run start
+To run you will need to  
+npm install  
+npm run build-prod  
+npm run start  
+In a second terminal  
 npm run build-dev
